@@ -7,11 +7,13 @@ import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -103,7 +105,7 @@ fun DataStoreDemo(modifier: Modifier) {
             coroutineScope.launch {
                 store.saveUsername(username)
             }
-        }) {
+        }, modifier = Modifier.padding(1.dp)) {
             Text("Save Username")
         }
 
