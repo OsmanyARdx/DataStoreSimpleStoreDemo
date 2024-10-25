@@ -69,19 +69,30 @@ fun DataStoreDemo(modifier: Modifier) {
     val store = AppStorage(LocalContext.current)
     val appPrefs = store.appPreferenceFlow.collectAsState(AppPreferences())
     val coroutineScope = rememberCoroutineScope()
-    Column (modifier = Modifier.padding(50.dp)) {
-        Text("Values = ${appPrefs.value.userName}, " +
-                "${appPrefs.value.highScore}, ${appPrefs.value.darkMode}")
+    Column(modifier = Modifier.padding(50.dp)) {
+        Text("Values = Username: ${appPrefs.value.userName}, " +
+                "High Score: ${appPrefs.value.highScore}, Dark Mode: ${appPrefs.value.darkMode}")
+
         Button(onClick = {
             coroutineScope.launch {
                 store.saveUsername("flygirl")
             }
-
         }) {
-            Text("Save Values")
+            Text("Save Username")
+        }
+
+
+        Button(onClick = {
+            coroutineScope.launch {
+                val newDarkMode = !appPrefs.value.darkMode
+                store.saveDarkMode(newDarkMode)
+            }
+        }) {
+            Text("Toggle Dark Mode")
         }
     }
 }
+
 
 // ToDo 1: Modify the App to store a high score and a dark mode preference
 // ToDo 2: Modify the APP to store the username through a text field
