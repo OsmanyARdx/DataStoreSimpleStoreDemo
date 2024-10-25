@@ -87,8 +87,12 @@ fun DataStoreDemo(modifier: Modifier) {
 
         Spacer(modifier = Modifier.padding(10.dp))
 
-        Text("Values = Username: ${appPrefs.value.userName}, " +
-                "High Score: ${appPrefs.value.highScore}, Dark Mode: ${appPrefs.value.darkMode}")
+        Text("Data Store:")
+
+        Text("Username - ${appPrefs.value.userName}")
+        Text("Score - ${appPrefs.value.highScore}")
+        Text("Dark Mode - ${if (appPrefs.value.darkMode) "Enabled" else "Disabled"}")
+
 
         Spacer(modifier = Modifier.padding(10.dp))
 
@@ -103,7 +107,7 @@ fun DataStoreDemo(modifier: Modifier) {
 
         Button(onClick = {
             coroutineScope.launch {
-                store.saveUsername(username)
+                store.saveUsername(username.ifEmpty { "default" })
             }
         }, modifier = Modifier.padding(1.dp)) {
             Text("Save Username")
